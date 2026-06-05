@@ -1,8 +1,12 @@
 name: Deploy to GitHub Pages
 
+# This workflow is OPTIONAL. The site is served directly from the `main`
+# branch via Pages "Deploy from a branch". This workflow is kept for users who
+# prefer the GitHub Actions deploy source; run it manually from the Actions tab.
+# (It requires repo Settings > Actions > General > Workflow permissions set to
+# "Read and write permissions" so it can enable/deploy Pages.)
+
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -10,7 +14,6 @@ permissions:
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
 concurrency:
   group: pages
   cancel-in-progress: true
@@ -28,7 +31,6 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
-          # Automatically enables GitHub Pages for the repo if not already enabled
           enablement: true
 
       - name: Upload artifact
